@@ -28,5 +28,8 @@ router.get('/all-projects',jwtMiddleware, projectController.getAllProjectControl
 // get user projects
 router.get('/user-projects',jwtMiddleware, projectController.getUserProjectController)
 
+// delete user Project
+router.delete('/remove-userproject/:id', jwtMiddleware, projectController.removeUserProjectController)
+
 // Export
 module.exports = router 

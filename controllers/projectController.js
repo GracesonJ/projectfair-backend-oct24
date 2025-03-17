@@ -73,3 +73,16 @@ exports.getUserProjectController = async (req, res) => {
     }
 }
 
+// delete user project
+exports.removeUserProjectController = async (req, res)=>{
+    console.log(` Inside Remove User Project Controller`);
+    const {id} = req.params
+    
+    try {
+        await projects.findByIdAndDelete({_id : id})
+        res.status(200).json(`Project Deleted`)
+        
+    } catch (error) {
+        res.status(401).json(error)
+    }
+}
