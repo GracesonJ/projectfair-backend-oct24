@@ -31,5 +31,11 @@ router.get('/user-projects',jwtMiddleware, projectController.getUserProjectContr
 // delete user Project
 router.delete('/remove-userproject/:id', jwtMiddleware, projectController.removeUserProjectController)
 
+// update-user-project
+router.put('/update-userproject/:id', jwtMiddleware, multerCongfig.single("projectImage"), projectController.editUserProjectController )
+
+// udpate user profile
+router.put('/update-userprofile', jwtMiddleware, multerCongfig.single("profile"), userController.updateUserProfileController)
+
 // Export
-module.exports = router 
+module.exports = router   

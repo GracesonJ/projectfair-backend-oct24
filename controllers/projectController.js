@@ -86,3 +86,33 @@ exports.removeUserProjectController = async (req, res)=>{
         res.status(401).json(error)
     }
 }
+
+// update user Project
+exports.editUserProjectController = async(req, res)=>{
+    console.log(`inside Edit user Project COntroller`);
+
+    const {id} = req.params
+    const userId = req.payload
+    const { title, language, github, website, overview, projectImage } = req.body
+    console.log(title, language, github, website, overview, projectImage);
+
+    uploadImage = req.file ? req.file.filename : projectImage
+
+    try {
+        const existingProject = await projects.findByIdAndUpdate({_id: id},{
+            title, 
+            language, 
+            github, 
+            website, 
+            overview, 
+            projectImage : uploadImage,
+            userId
+        },{new:true})
+
+        await existingProject.save()
+        res.status(200).json(existingProject)
+        
+    } catch (error) {
+        res.status(401).json(error)
+    }   
+}
